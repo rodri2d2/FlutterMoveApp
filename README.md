@@ -35,7 +35,9 @@ This will be a finish App ready to deploy.
 - [X] Page Views
 - [X] Streams
 - [X] Infinite Horizontal Scroll
-- [X] SearchDelegate
+- [X] SearchDelegateç
+- [X] External dependencies
+
 
 
 <br />
