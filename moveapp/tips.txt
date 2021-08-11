@@ -17,3 +17,11 @@ Dart
 
 
 Flutter
+
+    MediaQuery.of(context)
+    ----------------------
+    It will allows you to get dimensions and orientation of the device.
+    Like so, you can calculate/evaluate different conditions to generate you UI
+    It also allows by MediaQuery.of(context).padding to get device's safe area
+    official doc --> https://api.flutter.dev/flutter/widgets/MediaQuery-class.html
+
