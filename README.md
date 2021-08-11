@@ -1,5 +1,5 @@
-# Flutter MovieBD App
-A simple Movie Data Base que allows the user to see last added movies, most popular ones and search to for a title.
+# Flutter Movie App
+A simple Movie Data Base that allows the user to see last added movies, most popular ones and search to for a title.
 
 <br />
 
