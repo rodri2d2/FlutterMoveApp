@@ -20,11 +20,18 @@ class HomeView extends StatelessWidget {
       ),
 
 
-      body: Column(
-        children: [
-          CardSwiper()
-        ],
-      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //Main Cards
+            CardSwiper(),
+
+            //Movie slider
+            MovieSlider(),
+
+          ],
+        ),
+      )
 
     );
   }
