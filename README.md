@@ -43,7 +43,7 @@ This will be a finish App ready to deploy.
 <br />
 
 
-## Sample (App no finished yet...)
+## Sample (App not finished yet...)
 <p float="left">
 <img src="https://github.com/rodri2d2/FlutterMovieApp/blob/develop/gifs/upToNow.gif" width="200" />
 <br />
