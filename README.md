@@ -35,7 +35,7 @@ This will be a finish App ready to deploy.
 - [X] Page Views
 - [X] Streams
 - [X] Infinite Horizontal Scroll
-- [X] SearchDelegateç
+- [X] SearchDelegate
 - [X] External dependencies
 
 
@@ -43,7 +43,7 @@ This will be a finish App ready to deploy.
 <br />
 
 
-## Sample
+## Sample (App no finished yet...)
 <p float="left">
 <img src="https://github.com/rodri2d2/FlutterMovieApp/blob/develop/gifs/upToNow.gif" width="200" />
 <br />
