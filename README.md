@@ -39,7 +39,6 @@ This will be a finish App ready to deploy.
 - [X] External dependencies
 
 
-
 <br />
 
 
@@ -50,6 +49,14 @@ This will be a finish App ready to deploy.
 
 
 <br />
+
+```
+Attention:
+This app uses api key from a public domain. If you just clone it will not work.
+Plese visit: https://www.themoviedb.org/ and get your own API KEY!
+
+```
+
 
 > ## Author
 >Check my LinkedIn profile to know more about me. Feel free to contact for any question. 
