@@ -25,3 +25,11 @@ Flutter
     It also allows by MediaQuery.of(context).padding to get device's safe area
     official doc --> https://api.flutter.dev/flutter/widgets/MediaQuery-class.html
 
+
+    SliverWidget
+    -------------
+    They are widget with a scroll behaviour.
+    A CustomScrollView lets you supply slivers directly to create various scrolling effects,
+    such as lists, grids, and expanding headers. For example, to create a scroll view that contains
+    an expanding app bar followed by a list and a grid, use a list of three slivers:
+    SliverAppBar, SliverList, and SliverGrid.
