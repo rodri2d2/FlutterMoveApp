@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:moveapp/models/movie.dart';
+import 'package:moveapp/models/result_movie.dart';
 
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({Key? key}) : super(key: key);
+
+  //
+  final List<PopularResult> popular;
+
+  const MovieSlider({
+    Key? key,
+    required this.popular
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +34,12 @@ class MovieSlider extends StatelessWidget {
           ),
 
           Expanded(
-              child:         ListView.builder(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 20,
-                itemBuilder: (_, int index) => _MovieListContainer(),
+                itemCount: popular.length,
+                itemBuilder: (_, int index) {
+                 return _MovieListContainer(movie: popular[index]);
+                },
 
               ),
           )
@@ -41,8 +52,14 @@ class MovieSlider extends StatelessWidget {
 
 
 class _MovieListContainer extends StatelessWidget {
-  const _MovieListContainer({Key? key}) : super(key: key);
 
+  final PopularResult movie;
+
+  const _MovieListContainer({
+    Key? key,
+    required this.movie
+
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +76,7 @@ class _MovieListContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child:FadeInImage(
                 placeholder: AssetImage('resources/assets/loading.gif'),
-                image: NetworkImage('https://via.placeholder.com/300x400'),
+                image: NetworkImage(movie.fullPosterPath),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -72,7 +89,7 @@ class _MovieListContainer extends StatelessWidget {
 
           //
           Text(
-              'Back to the future',
+              movie.originalTitle,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
           )
