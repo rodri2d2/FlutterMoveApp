@@ -1,8 +1,17 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:moveapp/models/movie.dart';
 
 class CardSwiper extends StatelessWidget {
-  const CardSwiper({Key? key}) : super(key: key);
+
+  List<Movie> movies;
+
+  //Constructor
+  CardSwiper({
+    Key? key,
+    required this.movies
+  }) : super(key: key);
+
 
 
 
@@ -18,18 +27,21 @@ class CardSwiper extends StatelessWidget {
       width: double.infinity,
       height: deviceSize.height * 0.45, // to get 50% of screen size not includin app bar
       child: Swiper(
-        itemCount: 10,
+        itemCount: movies.length,
         layout: SwiperLayout.STACK,
         itemWidth: deviceSize.width * 0.8,
         itemHeight: deviceSize.height * 0.6,
         itemBuilder: (BuildContext context, int index){
+
+          final movie = movies[index];
+
           return GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'detail', arguments: 'movie-instance'),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: FadeInImage(
                 placeholder: AssetImage('resources/assets/loading.gif'),
-                image: NetworkImage('https://via.placeholder.com/300x400'),
+                image: NetworkImage(movie.fullPosterURL),
                 fit: BoxFit.cover,
               ),
             ),
