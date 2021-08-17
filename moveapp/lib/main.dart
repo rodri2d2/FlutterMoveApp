@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:moveapp/services/movie_service.dart';
+import 'package:provider/provider.dart';
 
 //Routes
 import './views/views.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(AppState());
+
+
+class AppState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: ( _ ) => MovieService(), lazy: true,)
+        ],
+      child: MyApp(),
+    );
+  }
+}
+
+
 
 class MyApp extends StatelessWidget {
   @override
