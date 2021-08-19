@@ -35,7 +35,9 @@ class HomeView extends StatelessWidget {
             ),
 
             //Movie slider
-            MovieSlider( popular: movieProvider.mostPopular
+            MovieSlider(
+                popular: movieProvider.mostPopular,
+              onNextPage: () => movieProvider.fetchMostPopularMovies(),
             ),
 
           ],
