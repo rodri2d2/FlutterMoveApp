@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:moveapp/models/movie.dart';
-import 'package:moveapp/models/result_movie.dart';
+
 
 
 class MovieSlider extends StatelessWidget {
 
   //
-  final List<PopularResult> popular;
+  final List<Movie> popular;
 
   const MovieSlider({
     Key? key,
@@ -53,7 +53,7 @@ class MovieSlider extends StatelessWidget {
 
 class _MovieListContainer extends StatelessWidget {
 
-  final PopularResult movie;
+  final Movie movie;
 
   const _MovieListContainer({
     Key? key,
@@ -76,7 +76,7 @@ class _MovieListContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child:FadeInImage(
                 placeholder: AssetImage('resources/assets/loading.gif'),
-                image: NetworkImage(movie.fullPosterPath),
+                image: NetworkImage(movie.fullPosterURL),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,

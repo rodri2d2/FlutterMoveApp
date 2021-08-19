@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:moveapp/models/most_popular.dart';
 import 'package:moveapp/models/movie.dart';
 import 'package:moveapp/models/on_cinemas.dart';
-import 'package:moveapp/models/result_movie.dart';
 
 
 class MovieService extends ChangeNotifier{
@@ -16,7 +15,7 @@ class MovieService extends ChangeNotifier{
 
   //
   List<Movie> onCinemaMovies = [];
-  List<PopularResult> mostPopular    = [];
+  List<Movie> mostPopular    = [];
 
   //
   MovieService(){
@@ -61,7 +60,7 @@ class MovieService extends ChangeNotifier{
     final popularMovies = MostPopular.fromJson(response.body);
 
     //
-    this.mostPopular = popularMovies.results;
+    this.mostPopular = [...mostPopular,  ...popularMovies.results];
 
     //
     notifyListeners();
