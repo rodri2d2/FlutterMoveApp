@@ -1,17 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:moveapp/models/movie.dart';
-import 'package:moveapp/models/result_movie.dart';
 
 
-class MovieSlider extends StatelessWidget {
+
+class MovieSlider extends StatefulWidget {
 
   //
-  final List<PopularResult> popular;
+  final List<Movie> popular;
+  final Function onNextPage;
 
   const MovieSlider({
     Key? key,
-    required this.popular
+    required this.popular,
+    required this.onNextPage
   }) : super(key: key);
+
+  @override
+  _MovieSliderState createState() => _MovieSliderState();
+}
+
+class _MovieSliderState extends State<MovieSlider> {
+
+  final ScrollController scrollController = new ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController.addListener(() {
+        if( scrollController.position.pixels >= scrollController.position.maxScrollExtent - 500){
+            widget.onNextPage();
+        }
+    });
+
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +64,11 @@ class MovieSlider extends StatelessWidget {
 
           Expanded(
               child: ListView.builder(
+                controller: this.scrollController,
                 scrollDirection: Axis.horizontal,
-                itemCount: popular.length,
+                itemCount: widget.popular.length,
                 itemBuilder: (_, int index) {
-                 return _MovieListContainer(movie: popular[index]);
+                 return _MovieListContainer(movie: widget.popular[index]);
                 },
 
               ),
@@ -53,7 +83,7 @@ class MovieSlider extends StatelessWidget {
 
 class _MovieListContainer extends StatelessWidget {
 
-  final PopularResult movie;
+  final Movie movie;
 
   const _MovieListContainer({
     Key? key,
@@ -76,7 +106,7 @@ class _MovieListContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child:FadeInImage(
                 placeholder: AssetImage('resources/assets/loading.gif'),
-                image: NetworkImage(movie.fullPosterPath),
+                image: NetworkImage(movie.fullPosterURL),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,

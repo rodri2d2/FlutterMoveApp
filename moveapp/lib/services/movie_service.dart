@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:moveapp/models/most_popular.dart';
 import 'package:moveapp/models/movie.dart';
 import 'package:moveapp/models/on_cinemas.dart';
-import 'package:moveapp/models/result_movie.dart';
 
 
 class MovieService extends ChangeNotifier{
@@ -16,7 +15,10 @@ class MovieService extends ChangeNotifier{
 
   //
   List<Movie> onCinemaMovies = [];
-  List<PopularResult> mostPopular    = [];
+  List<Movie> mostPopular    = [];
+
+  //
+  int _currentPage = 0;
 
   //
   MovieService(){
@@ -24,44 +26,45 @@ class MovieService extends ChangeNotifier{
     this.fetchMostPopularMovies();
   }
 
-  /// To get a list of all movies on Cinema
-  fetchOnDisplayMovies() async {
 
+  _fetchData(String path, [ int page = 1]) async{
     var url = Uri.https(
-      _baseURL,
-      '/3/movie/now_playing',
-      {
-        'api_key' : _apiKey,
-        'language': _language,
-        'page'    : '1'
-      }
+        _baseURL,
+        path,
+        {
+          'api_key' : _apiKey,
+          'language': _language,
+          'page'    : page.toString()
+        }
     );
     final response = await http.get(url);
-    final onCinema = OnCinema.fromJson(response.body);
+    return response.body;
+  }
 
+  /// To get a list of all movies on Cinema
+  fetchOnDisplayMovies() async {
+    //
+    final response = await _fetchData('/3/movie/now_playing');
+    final onCinema = OnCinema.fromJson(response);
     //
     this.onCinemaMovies = onCinema.results;
-
+    //
     notifyListeners();
   }
+
+
+
 
   /// To get a list of all movies on Cinema
   fetchMostPopularMovies() async {
 
-    var url = Uri.https(
-        _baseURL,
-        '/3/movie/popular',
-        {
-          'api_key' : _apiKey,
-          'language': _language,
-          'page'    : '1'
-        }
-    );
-    final response = await http.get(url);
-    final popularMovies = MostPopular.fromJson(response.body);
+    this._currentPage++;
+
+    final response = await _fetchData('/3/movie/popular', _currentPage);
+    final popularMovies = MostPopular.fromJson(response);
 
     //
-    this.mostPopular = popularMovies.results;
+    this.mostPopular = [...mostPopular,  ...popularMovies.results];
 
     //
     notifyListeners();

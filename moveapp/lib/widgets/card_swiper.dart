@@ -22,6 +22,18 @@ class CardSwiper extends StatelessWidget {
     //
     final deviceSize = MediaQuery.of(context).size;
 
+    if (movies.length == 0){
+      return Container(
+        width: double.infinity,
+        height: deviceSize.height * 0.45,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+
+      );
+    }
+
+
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,

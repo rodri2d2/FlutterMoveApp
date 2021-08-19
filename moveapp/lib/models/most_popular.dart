@@ -1,16 +1,13 @@
-// To parse this JSON data, do
-//
-//     final mostPopular = mostPopularFromMap(jsonString);
 
 import 'dart:convert';
+import 'package:moveapp/models/movie.dart';
 
-import 'package:moveapp/models/result_movie.dart';
 
 class MostPopular {
 
   //Properties
   int page;
-  List<PopularResult> results;
+  List<Movie> results;
   int totalPages;
   int totalResults;
 
@@ -28,7 +25,7 @@ class MostPopular {
   ///Constructor from MAP
   factory MostPopular.fromMap(Map<String, dynamic> json) => MostPopular(
     page: json["page"],
-    results: List<PopularResult>.from(json["results"].map((x) => PopularResult.fromMap(x))),
+    results: List<Movie>.from(json["results"].map((x) => Movie.fromMap(x))),
     totalPages: json["total_pages"],
     totalResults: json["total_results"],
   );
