@@ -74,9 +74,8 @@ class MovieService extends ChangeNotifier{
   }
 
 
+  /// To get a Cast information of a movie base on Movie ID
   Future<List<Cast>> fetchMovieCast(int movieId) async {
-
-
     if (this.moviesCast.containsKey(movieId)){
       return this.moviesCast[movieId]!;
     }else{
@@ -85,6 +84,23 @@ class MovieService extends ChangeNotifier{
       moviesCast[movieId] = creditsRespponse.cast;
       return creditsRespponse.cast;
     }
+  }
+
+
+  Future<List<Movie>> fetchSearchMovie( String query ) async {
+    var url = Uri.https(
+        _baseURL,
+        '3/search/movie/',
+        {
+          'api_key' : _apiKey,
+          'language': _language,
+          'query'   : query
+        }
+    );
+
+    final response = await http.get(url);
+    final movieSearch =  MostPopular.fromJson(response.body);
+    return movieSearch.results;
   }
 
 }
