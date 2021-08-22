@@ -101,7 +101,7 @@ class _MovieListContainer extends StatelessWidget {
 
           //
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, 'detail', arguments: 'movie-instance'),
+            onTap: () => Navigator.pushNamed(context, 'detail', arguments: movie),
             child:ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child:FadeInImage(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:moveapp/models/cast.dart';
+import 'package:moveapp/models/credit.dart';
 import 'package:moveapp/models/most_popular.dart';
 import 'package:moveapp/models/movie.dart';
 import 'package:moveapp/models/on_cinemas.dart';
@@ -16,6 +18,7 @@ class MovieService extends ChangeNotifier{
   //
   List<Movie> onCinemaMovies = [];
   List<Movie> mostPopular    = [];
+  Map<int, List<Cast>> moviesCast = {};
 
   //
   int _currentPage = 0;
@@ -68,6 +71,20 @@ class MovieService extends ChangeNotifier{
 
     //
     notifyListeners();
+  }
+
+
+  Future<List<Cast>> fetchMovieCast(int movieId) async {
+
+
+    if (this.moviesCast.containsKey(movieId)){
+      return this.moviesCast[movieId]!;
+    }else{
+      final jsonData = await this._fetchData('3/movie/${movieId}/credits');
+      final creditsRespponse = Credit.fromJson(jsonData);
+      moviesCast[movieId] = creditsRespponse.cast;
+      return creditsRespponse.cast;
+    }
   }
 
 }
