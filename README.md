@@ -25,7 +25,7 @@ This will be a finish App ready to deploy.
 
 ```
 
-> NOTE: App not finished yet
+> NOTE: Even if this app is already finish, during my Flutter learnging path it will keep improving...
 
 ### This app will implement:
 
@@ -36,13 +36,14 @@ This will be a finish App ready to deploy.
 - [X] Streams
 - [X] Infinite Horizontal Scroll
 - [X] SearchDelegate
+- [X] Hero and HeroAnimation
 - [X] External dependencies
 
 
 <br />
 
 
-## Sample (App not finished yet...)
+## Sample 
 <p float="left">
 <img src="https://github.com/rodri2d2/FlutterMovieApp/blob/develop/gifs/upToNow.gif" width="200" />
 <br />
