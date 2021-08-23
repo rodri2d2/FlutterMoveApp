@@ -88,10 +88,14 @@ class _MovieListContainer extends StatelessWidget {
   const _MovieListContainer({
     Key? key,
     required this.movie
-
   }) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
+
+    this.movie.heroWidgetId = 'slider-${movie.id}';
+
     return Container(
       width: 130,
       height: 190,
@@ -102,16 +106,19 @@ class _MovieListContainer extends StatelessWidget {
           //
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'detail', arguments: movie),
-            child:ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child:FadeInImage(
-                placeholder: AssetImage('resources/assets/loading.gif'),
-                image: NetworkImage(movie.fullPosterURL),
-                width: 130,
-                height: 190,
-                fit: BoxFit.cover,
+            child: Hero(
+              tag: movie.heroWidgetId!,
+              child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child:FadeInImage(
+                            placeholder: AssetImage('resources/assets/loading.gif'),
+                            image: NetworkImage(movie.fullPosterURL),
+                            width: 130,
+                            height: 190,
+                            fit: BoxFit.cover,
               ),
             ),
+            )
           ),
 
           //

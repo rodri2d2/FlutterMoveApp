@@ -43,9 +43,10 @@ class MovieSearchDelegate extends SearchDelegate {
     }
 
     final moviesProvider = Provider.of<MovieService>(context, listen: false);
+    moviesProvider.getSuggestionByQuery(query);
 
-    return FutureBuilder(
-      future: moviesProvider.fetchSearchMovie(query),
+    return StreamBuilder(
+      stream: moviesProvider.suggestionStream,
       builder: (_, AsyncSnapshot<List<Movie>> snapshot){
 
         if( !snapshot.hasData ){
@@ -53,10 +54,11 @@ class MovieSearchDelegate extends SearchDelegate {
         }
 
         final movies = snapshot.data!;
-
         return ListView.builder(
           itemCount: movies.length,
-          itemBuilder: (_ , int index) => MovieSugestionItem(movie: movies[index]),
+          itemBuilder: (_ , int index) {
+            return MovieSugestionItem(movie: movies[index]);
+          },
         );
       },
     );
@@ -71,9 +73,10 @@ class MovieSearchDelegate extends SearchDelegate {
     }
 
     final moviesProvider = Provider.of<MovieService>(context, listen: false);
+    moviesProvider.getSuggestionByQuery(query);
 
-    return FutureBuilder(
-      future: moviesProvider.fetchSearchMovie(query),
+    return StreamBuilder(
+      stream: moviesProvider.suggestionStream,
       builder: (_, AsyncSnapshot<List<Movie>> snapshot){
 
         if( !snapshot.hasData ){
@@ -81,10 +84,11 @@ class MovieSearchDelegate extends SearchDelegate {
         }
 
         final movies = snapshot.data!;
-
         return ListView.builder(
             itemCount: movies.length,
-            itemBuilder: (_ , int index) => MovieSugestionItem(movie: movies[index]),
+            itemBuilder: (_ , int index) {
+              return MovieSugestionItem(movie: movies[index]);
+            },
         );
       },
     );
@@ -110,18 +114,25 @@ class MovieSugestionItem extends StatelessWidget {
 
   final Movie movie;
 
+
   const MovieSugestionItem({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    movie.heroWidgetId = 'search-${ movie.id }';
+
     return Container(
       margin: EdgeInsets.all(2),
       child: ListTile(
-        leading: FadeInImage(
-          placeholder: AssetImage('resources/assets/loading.gif') ,
-          image: NetworkImage(movie.fullPosterURL),
-          width: 50,
-          fit: BoxFit.cover,
+        leading: Hero(
+          tag: movie.heroWidgetId!,
+          child: FadeInImage(
+            placeholder: AssetImage('resources/assets/loading.gif') ,
+            image: NetworkImage(movie.fullPosterURL),
+            width: 50,
+            fit: BoxFit.cover,
+          )
         ),
         title: Text(movie.originalTitle),
         subtitle: Text(movie.popularity.toString()),

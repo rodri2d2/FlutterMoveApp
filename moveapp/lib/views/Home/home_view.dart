@@ -16,14 +16,20 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Theater movies'),
+        title: Text(
+            'TMDB App',
+          style: TextStyle(
+              fontSize: 32,
+              color: Colors.amberAccent
+          ),
+        ),
         actions: [
           IconButton(
               icon: Icon( Icons.search_outlined ),
               onPressed: () => showSearch(context: context, delegate: MovieSearchDelegate()),
           )
         ],
-        elevation: 0,
+        elevation: 3,
       ),
 
 

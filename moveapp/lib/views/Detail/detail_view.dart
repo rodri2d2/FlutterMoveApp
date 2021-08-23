@@ -54,7 +54,7 @@ class _CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.black,
       expandedHeight: 200,
       floating: false,
       pinned: true,
@@ -68,7 +68,7 @@ class _CustomAppBar extends StatelessWidget {
           color: Colors.black12,
           child: Text(
               movie.title,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             textAlign: TextAlign.left,
           ),
         ),
@@ -106,16 +106,18 @@ class _PosterAndTitle extends StatelessWidget {
         children: [
 
           //
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: FadeInImage(
-              placeholder: AssetImage('resources/assets/loading.gif'),
-              image: NetworkImage(movie.fullPosterURL),
-              fit: BoxFit.cover,
-              height: 150,
-            ),
+          Hero(
+              tag: movie.heroWidgetId!,
+              child:ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: FadeInImage(
+                  placeholder: AssetImage('resources/assets/loading.gif'),
+                  image: NetworkImage(movie.fullPosterURL),
+                  fit: BoxFit.cover,
+                  height: 150,
+                ),
+              ),
           ),
-
 
           //
           SizedBox(width: 20),
@@ -146,7 +148,7 @@ class _PosterAndTitle extends StatelessWidget {
 
                 Row(
                   children: [
-                    Icon(Icons.star_outline, size: 15, color: Colors.blueGrey),
+                    Icon(Icons.star_outline, size: 15, color: Colors.purple),
 
                     //
                     SizedBox(width: 5),

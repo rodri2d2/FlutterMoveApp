@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData.light().copyWith(
         appBarTheme: AppBarTheme(
-          color: Colors.blueGrey
+          color: Colors.black
         )
       ),
     );
